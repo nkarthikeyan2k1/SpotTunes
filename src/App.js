@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Route, Routes, Navigate } from "react-router-dom";
+import "./App.css";
+import Template from "./Pages/Template";
+// https://api.spotify.com/v1/search
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Navigate to="/spot-tunes" replace />} />
+          <Route path="/spot-tunes" element={<Template />}>
+            <Route path="" element={<Navigate to="for-you" replace />} />
+            <Route path="for-you" element={<div>for you!</div>} />
+            <Route path="top-tracks" element={<div>top!</div>} />
+            <Route path="favourites" element={<div>favourites!</div>} />
+            <Route path="recentlt-played" element={<div>recentlt!</div>} />
+          </Route>
+          <Route path="*" element={<Navigate to="/spot-tunes" replace />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 
